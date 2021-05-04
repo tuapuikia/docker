@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 MAINTAINER Couchbase Docker Team <docker@couchbase.com>
 
@@ -15,7 +15,7 @@ MAINTAINER Couchbase Docker Team <docker@couchbase.com>
 #  numactl: numactl
 RUN apt-get update && \
     apt-get install -yq runit wget chrpath tzdata \
-    lsof lshw sysstat net-tools numactl python-httplib2 && \
+    lsof lshw sysstat net-tools numactl python-httplib2 libssl1.0.0 runit && \
     apt-get autoremove && apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
