@@ -80,10 +80,19 @@ $ curl http://localhost:4985
 
 **Step - 1 :** Prepare the Sync Gateway configuration file on your local machine:
 
+For versions 3.0.0 and newer:
 ```
 $ cd /tmp
-$ wget https://raw.githubusercontent.com/couchbase/sync_gateway/master/examples/basic-walrus-bucket.json
-$ mv basic-walrus-bucket.json my-sg-config.json
+$ wget https://raw.githubusercontent.com/couchbase/sync_gateway/master/examples/startup_config/basic.json
+$ mv basic.json my-sg-config.json
+$ vi my-sg-config.json  # make edits
+```
+
+For older versions:
+```
+$ cd /tmp
+$ wget https://raw.githubusercontent.com/couchbase/sync_gateway/master/examples/release/2.8.3/examples/serviceconfig.json
+$ mv serviceconfig.json my-sg-config.json
 $ vi my-sg-config.json  # make edits
 ```
 
@@ -99,7 +108,13 @@ Sync Gateway can also load its configuration directly from a public URL.
 
 **Step - 2 :** Then start Sync Gateway and give it the URL to the raw JSON data:
 
-`$ docker run -p 4984:4984 -d couchbase/sync-gateway https://raw.githubusercontent.com/couchbase/sync_gateway/master/examples/basic-walrus-bucket.json`
+For versions 3.0.0 and newer:
+
+`$ docker run -p 4984:4984 -d couchbase/sync-gateway https://raw.githubusercontent.com/couchbase/sync_gateway/master/examples/startup_config/basic.json`
+
+For older versions:
+
+`$ docker run -p 4984:4984 -d couchbase/sync-gateway https://raw.githubusercontent.com/couchbase/sync_gateway/release/2.8.3/examples/serviceconfig.json`
 
 # Running with a Couchbase Server container
 
@@ -154,13 +169,10 @@ This section only applies if you need to run the `sgcollect_info` tool to collec
 You can find more information about the parameters used in this request in the [sgcollect_info documentation](https://docs.couchbase.com/sync-gateway/current/admin-rest-api.html#/server/post__sgcollect_info).
 
 
-# Licensing
+# License
 
-Sync Gateway comes in 2 Editions: Enterprise Edition and Community Edition. You can find details on the differences between the 2 and licensing details on the [Product Editions](https://www.couchbase.com/products/editions) page.
+Couchbase software typically comes in two editions: Enterprise Edition and Community Edition. For Couchbase Server, you can find details on the differences between the two and licensing information on the [Couchbase Server Editions](https://docs.couchbase.com/server/current/introduction/editions.html) page.
 
-- **Enterprise Edition** -- free for development, testing and POCs. Requires a paid subscription for production deployment. Please refer to the [subscriptions](https://www.couchbase.com/subscriptions-and-support) page for details on enterprise edition agreements.
-- **Community Edition** -- free for unrestricted use for community users.
+-	**Enterprise Edition** -- The Enterprise Edition license provides for free for development and testing for Couchbase Enterprise Edition. A paid subscription for production deployment is required. Please refer to the [pricing](https://www.couchbase.com/pricing) page for details on Couchbase’s Enterprise Edition.
 
-By default, the `latest` Docker tag points to the latest Enterprise Edition. If you want the Community Edition instead, you should add the appropriate tag, such as
-
-`$ docker run sync-gateway:community-2.5.0`
+-	**Community Edition** -- The Community Edition license provides for free deployment of Couchbase Community Edition. For Couchbase Server, the Community Edition may be used for departmental-scale deployments of up to five node clusters.  It has recently been changed to disallow use of XDCR, which is now an exclusive Enterprise Edition feature.
